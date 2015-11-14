@@ -47,6 +47,17 @@ force.linkDistance(function(link){
     .attr("width", width)
     .attr("height", height);
 
+	var defs = svg.append('svg:defs');
+	
+	defs.append("svg:pattern")
+		.attr("id", "image")
+		.append("svg:image")
+		.attr("xlink:href", "./wemy.jpg")
+		.attr("width", 20)
+		.attr("height", 20)
+		.attr("x",0)
+		.attr("y",0);
+
     var node = svg.selectAll(".node"),
     link = svg.selectAll(".link");
 
@@ -70,7 +81,16 @@ force.linkDistance(function(link){
      link.exit().remove();
 
      node = node.data(force.nodes(), function(d) { return d.id;});
-     node.enter().append("circle").attr("class", function(d) { return "node " + d.id; }).attr("r", 8);
+     node.enter().append("circle")
+						.attr("class", function(d) { 
+							return "node " + d.id; 
+						})
+						.attr("cx", 225)
+						.attr("cy", 225)
+						.attr("r", 20)
+						.style("fill", "url(#image)")
+						.style("stroke", "black")
+						.style("stroke-width", 0.25);
      node.exit().remove();
 
      force.start();
