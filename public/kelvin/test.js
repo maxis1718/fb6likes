@@ -3,7 +3,7 @@ function dumpRes(res) {
     return res;
 }
 
-function draw(res) {
+/*function draw(res) {
     var selfNode = res.shift();
     res.forEach(function(node) {
       node.dis *= 500;
@@ -17,7 +17,7 @@ function draw(res) {
     update();
     navTo('graph');
     return res;
-}
+}*/
 
 function testRequest(req) {
     console.log(req);
@@ -235,17 +235,16 @@ function test(queryArray) {
     //then(dumpRes).
     then(feedFetcher(regexMatcher).fetchAllFeed).
     //then(dumpRes).
-    then(genDistance).
-    then(draw).
-    then(dumpRes);
+    then(genDistance);
+    //then(draw).
 }
 
 function mainFunc(queryArray) {
-    loginIfNecessaryAndCall(test.bind(this, queryArray)).then(dumpRes);
+    return loginIfNecessaryAndCall(test.bind(this, queryArray));
 }
 
 function qFunc() {
-    mainFunc(['台灣', '中國', '兩岸', '棒球', '中華']);
+    mainFunc(['台灣', '中國', '兩岸', '棒球', '中華']).then(dumpRes);
     return false;
 }
 
