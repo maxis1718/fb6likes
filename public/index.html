@@ -32,14 +32,8 @@
 
 <body>
     <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1006235269435798";
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
+    <script type="text/javascript" src="js/fb-login.js"></script>
+
     <div id="fullpage">
         <div class="section active bg-fb">
             <div class="section-title">
@@ -49,8 +43,9 @@
                 <div>
                     <h4>聽聽不同的聲音</h4>
                 </div>
-                <div class="fb-login-button-wrap">
-                    <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
+                <div class="fb-buttons-wrap">
+                    <button class="fb-login-btn d-n fb-btn">Login</button>
+                    <button class="fb-logout-btn d-n fb-btn">Logout</button>
                 </div>
             </div>
         </div>

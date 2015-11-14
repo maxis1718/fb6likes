@@ -34,23 +34,58 @@ body {
     height: 300px;
     color: white;
     margin: 0 auto;
-    padding-top: 50px;
     text-align: center;
 }
 .section-title h1 {
     font-size: 72px;
 }
 
-.section-title .fb-login-button-wrap {
-    margin-top: 24px;
+.section-title .fb-buttons-wrap {
+    margin-top: 48px;
+}
+
+.fb-login-btn, .fb-logout-btn {
+    background-color: #1b275d;
+    width: 128px;
+    margin: 0 auto;
+    color: white;
+    /*transition: background-color 2s;*/
+}
+
+.fb-btn {
+    padding: 10px 15px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.4;
+    border: none;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    border-radius: 4px;
+    transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+.fb-btn:hover {
+    cursor: pointer;
+}
+
+.fb-login-btn {
+    background-color: #2ecc71; 
+}
+.fb-login-btn:hover {
+    background-color: #58d68d;
+}
+
+.fb-logout-btn {
+    background-color: #1abc9c;
+}
+.fb-logout-btn:hover {
+    background-color: #48c9b0;
 }
 
 .section-title .fb-login-button {
     width: 80px;
     height: 25px;
-    position: 
-}
-
-.d-ib {
-    display: inline-block;
 }
