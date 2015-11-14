@@ -15,8 +15,9 @@
 
     </style>
     <body>
-	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <div class="d3-container"></div>
+	<script src="js/jquery.min.js"></script>
+    <script src="js/d3.min.js"></script>
     <script>
 
     var width = 1000,
@@ -40,7 +41,7 @@
 		return link.dis;
 	});
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select(".d3-container").append("svg")
     .attr("width", width)
     .attr("height", height);
 
