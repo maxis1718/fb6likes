@@ -1,0 +1,27 @@
+<html xmlns:fb="https://www.facebook.com/2008/fbml">
+<body>
+<div id="fb-root"></div>
+<script>
+  /* All Facebook functions should be included 
+     in this function, or at least initiated from here */
+     console.log("p");
+  window.fbAsyncInit = function() {
+    FB.init({appId: '1006235269435798', 
+             status: true, 
+             cookie: true,
+         xfbml: true});
+    console.log("a");
+    FB.api('/me', function(response) {
+      console.log(response);
+      console.log(response.name);
+    });
+  };
+  (function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol +
+      '//connect.facebook.net/en_US/all.js';
+    document.getElementById('fb-root').appendChild(e);
+  }());
+</script>
+</body>
+<html>
