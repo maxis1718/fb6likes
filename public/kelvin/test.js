@@ -225,6 +225,7 @@ function test() {
 
 function mainFunc() {
     loginIfNecessaryAndCall(test);
+    return false;
 }
 
 //export var main = test;
