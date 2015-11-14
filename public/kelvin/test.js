@@ -54,6 +54,7 @@ function genDistance(data) {
     // data: [
     //   {
     //     uid: 'xxx' // first one will always be me
+    //     img: '...' // img src
     //     feed: [ {id, link, message, name, story}, ... ]
     //   },
     //   {
@@ -61,7 +62,17 @@ function genDistance(data) {
     //   },
     //   ...
     // ]
-    
+    var n = data.length;
+    var score = Array.apply(null, Array(n)).map(Number.prototype.valueOf,0);
+    // return format
+    // ret: [
+    //   {
+    //     id: 'xxx',
+    //     img: '...',
+    //     dis: 10,
+    //   },
+    //   ...
+    // ]
 }
 
 function test() {
