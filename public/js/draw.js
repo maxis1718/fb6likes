@@ -69,10 +69,12 @@ function update() {
   // Update the nodes…
   node = vis.selectAll("circle.node")
       .data(nodes, function(d) { return d.id; })
-      .style("fill", color);
+      .style("fill", function(d) {
+        return "url(#image" + d.id + ")";
+      });
 
   node.transition()
-      .attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; });
+      .attr("r", function(d) { return 60/2; });
 
   // Enter any new nodes.
   node.enter().append("svg:circle")
@@ -81,9 +83,9 @@ function update() {
       .attr("cy", function(d) { return 60/2; })
       .attr("r", function(d) { return 60/2; })
       .style("fill", function(d) {
-      	return "url(#image" + d.id + ")"; 
+        return "url(#image" + d.id + ")";
       })
-	  .on('click', click)
+	    .on('click', click)
       .call(force.drag);
 
   // Exit any old nodes.
