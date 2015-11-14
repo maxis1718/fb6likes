@@ -68,7 +68,7 @@ function logout() {
   });
 }
 
-function getAllFriendsID() {
+function getAllFriendsID(cb) {
    FB.api('/me/friends', function(response) {
         //console.log(response['data']);
         for (var i=0;i<response['data'].length;i++) {
@@ -78,6 +78,7 @@ function getAllFriendsID() {
           //console.log(response['data'][i].name);
           getTargetFriendsFeed(response['data'][i].id);
         }
+        cb();
    });
 }
 function getTargetFriendsFeed(feed_id) {
