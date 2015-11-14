@@ -52,24 +52,23 @@
 
     setTimeout(function() {
 		$.getJSON("./example.json",function(data){
-			var first="", i=0;
+			var first=null, i=0;
 			$.each(data, function(key, val){
 				++i;
 			    var tmp = {id: val.id, img: val.img}; 
 			
 			    nodes.push(tmp);
-				if(first==="") first=val.id;
+				if(first===null) first=tmp;
 				else
-				    links.push({source: first, target: val.id, dis: val.dis});
+				    links.push({source: first, target: tmp, dis: val.dis});
 			});
+			start();
 		});
-		start();
 
     }, 0);
 
     function start() {
 		for(n in nodes){
-			console.log(nodes[n].img);
 			var tmp = defs.append("svg:pattern")
 							.attr("id", "image"+nodes[n].id)
 							.attr("width", circle_width/4)
