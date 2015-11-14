@@ -22,7 +22,12 @@ function promisedRequest(req) {
 
 function fetchMyFriend() {
     return new Promise(function(resolve,reject) {
-        promisedRequest('/me/friends').then(
+        var fieldWeCare = [
+            'name',
+            'id',
+            'picture'
+        ];
+        promisedRequest('/me/friends?fields=' + fieldWeCare.join(',')).then(
             function(res) {
                 resolve(res.data);
             }
