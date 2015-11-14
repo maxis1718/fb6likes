@@ -13,10 +13,10 @@
      stroke-width: 1.5px;
     }
 
-    .node.a { fill: #ff7f0e; distance: 18;}
-    .node.b { fill: #2ca02c; distance: 18;}
-    .node.c { fill: #2ca02c; distance: 18;}
-    .node.d { fill: #2ca02c; distance: 18;}
+    .node.a { fill: #ff7f0e;}
+    .node.b { fill: #2ca02c;}
+    .node.c { fill: #2ca02c;}
+    .node.d { fill: #2ca02c;}
 
 
     </style>
@@ -36,12 +36,12 @@
     .nodes(nodes)
     .links(links)
     .charge(-400)
-    .linkDistance(120)
-//function(d){
-//		return d.distance;
-//	})
     .size([width, height])
     .on("tick", tick);
+
+force.linkDistance(function(link){
+	return link.dis;
+});
 
     var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -55,7 +55,10 @@
      var a = {id: "a"}, b = {id: "b"}, c = {id: "c"},d = {id: "d"};
 
     nodes.push(a, b, c, d);
-    links.push({source: a, target: b}, {source: a, target: c},{source: a, target: d});
+    links.push(
+		{source: a, target: b, dis:120}, 
+		{source: a, target: c, dis:180},
+		{source: a, target: d, dis:150});
     start();
     }, 0);
 
