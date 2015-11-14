@@ -92,6 +92,31 @@ body {
     outline: none;
 }
 
+.options {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 30px;    
+}
+.options .option {
+    padding: 7px;
+    opacity: 0.95;
+    margin-left: 3px;
+}
+
+.options .option:nth-child(odd) {
+    background-color: #2abb67;
+
+}
+
+.options .option:nth-child(even) {
+    background-color: #1abc9c;
+}
+
+.options .option:hover {
+    opacity: 1.0;
+    cursor: pointer;
+}
+
 /* for d3 */
 
 .d3-container .link {
