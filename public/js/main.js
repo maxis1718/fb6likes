@@ -19,8 +19,21 @@ $(document).ready(function() {
 
     $('.topic-input').keyup(function(e){
         if (e.keyCode === 13 || e.which === 13) {
-            var queries = ['台灣', '中國', '兩岸', '棒球', '中華'];
+            // extract topics
+            var queries = getQuery($(this));
             mainFunc(queries);
         }
+    });
+
+    $('.draw-warp').click(function(e){
+        var queries = getQuery($('.topic-input'));
+        mainFunc(queries);
+    });
+
+    $('.option').click(function(e){
+        var currentQueries = getQuery($('.topic-input'));
+        currentQueries.push($(this).text());
+        $('.topic-input').val(currentQueries.join(','));
+        $(this).remove();
     });
 });

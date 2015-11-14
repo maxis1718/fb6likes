@@ -75,13 +75,13 @@ body {
 
 .input-wrap {
     width: 100%;
-    height: 300px;
+    height: 450px;
     margin: 0 auto;
     text-align: center;
 }
 
 .topic-input {
-    width: 280px;
+    width: 320px;
     background: none;
     border: 0;
     border-bottom: 2px dashed #ddd;
@@ -93,27 +93,51 @@ body {
 }
 
 .options {
-    width: 80%;
+    width: 320px;
+    min-height: 64px;
     margin: 0 auto;
-    margin-top: 30px;    
+    margin-top: 30px;
+    border: 2px solid rgb(52, 75, 141);
+    padding: 24px 0;
+    background-color: rgb(52, 75, 141);
+    border-radius: 5px;
 }
 .options .option {
     padding: 7px;
     opacity: 0.95;
-    margin-left: 3px;
+    margin-left: 7px;
+    margin-top: 7px;
+    border-radius: 2px;
+    box-shadow: 2px 2px rgb(25, 38, 77);
 }
 
 .options .option:nth-child(odd) {
-    background-color: #2abb67;
-
+    background-color: rgb(35, 52, 104);
 }
 
 .options .option:nth-child(even) {
-    background-color: #1abc9c;
+    background-color: rgb(35, 52, 104);
 }
 
 .options .option:hover {
     opacity: 1.0;
+    cursor: pointer;
+}
+
+.draw-warp {
+    margin-top: 48px;
+    width: 72px;
+    height: 72px;
+    background-color: #16a085;
+    margin: 48px auto 0 auto;
+    line-height: 72px;
+    border-radius: 48%;
+    font-size: 38px;
+    box-shadow: 2px 2px #146253;
+}
+
+.draw-warp:hover {
+    background-color: #1abc9c;
     cursor: pointer;
 }
 
