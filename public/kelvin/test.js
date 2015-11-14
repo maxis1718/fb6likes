@@ -30,6 +30,12 @@ function fetchMyFriend() {
     });
 }
 
+function preprocessFeedArr(arr) {
+    arr.forEach(function(ele) {
+        ele.md5 = calcMD5(ele.message+ele.link);
+    });
+}
+
 function fetchFeed(uid) {
     var fieldWeCare = [
         'message',
@@ -37,10 +43,19 @@ function fetchFeed(uid) {
         'story',
         'name',
         'caption',
-        'description'
+        'description',
+        'likes'
     ];
-    var req = '/' + uid + '/feed?fields=' + fieldWeCare.join(',');
-    return promisedRequest(req).then(function(res) { return { uid:uid, feed:res.data }; })
+    var limit = 100;
+    var req = '/' + uid + '/feed?fields=' + fieldWeCare.join(',') + '&limit=' + limit;
+    return promisedRequest(req).then(function(res) {
+        var feedArr = res.data;
+        preprocessFeedArr(feedArr);
+        return {
+            uid:uid,
+            feed:feedArr
+        };
+    });
 }
 
 function fetchAllFeed(targets) {
@@ -64,6 +79,7 @@ function genDistance(data) {
     // ]
     var n = data.length;
     var score = Array.apply(null, Array(n)).map(Number.prototype.valueOf,0);
+    
     // return format
     // ret: [
     //   {
