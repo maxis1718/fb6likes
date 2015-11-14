@@ -82,7 +82,7 @@ function feedFetcher(regexMatcher) {
         fetchAllFeed: function(targets) {
             var pics = [];
             for (var i=0;i<targets.length;i++) {
-                pics.push(JSON.stringify(targets[i].picture.data.url));
+                pics.push(targets[i].picture.data.url);
             }
             //var ids = ['me'].concat(targets.map(function(x) { return x.id; }));
             var ids = targets.map(function(x) { return x.id; });
