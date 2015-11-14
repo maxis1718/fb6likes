@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test 2</title>
+</head>
+<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1006235269435798',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        // the user is logged in and has authenticated your
+        // app, and response.authResponse supplies
+        // the user's ID, a valid access token, a signed
+        // request, and the time the access token 
+        // and signed request each expire
+        var uid = response.authResponse.userID;
+        var accessToken = response.authResponse.accessToken;
+
+        doTheThing();
+      } else if (response.status === 'not_authorized') {
+        // the user is logged in to Facebook, 
+        // but has not authenticated your app
+        loginAndDoThing();
+      } else {
+        loginAndDoThing();
+      }
+     });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  function loginAndDoThing() {
+    FB.login(function(response) {
+      if (response.authResponse) {
+          doTheThing();
+        } else {
+         console.log('User cancelled login or did not fully authorize.');
+        }
+    }, {scope: 'email, user_likes, user_friends, user_posts'});
+  }
+
+  function logout() {
+    FB.logout(function() {
+      console.log('logged out');
+    });
+  }
+
+  function doTheThing() {
+    // friends
+   /*FB.api('/10204299211355164/feed', function(response) {
+     console.log( JSON.stringify(response.data) + '.');
+   });
+    */
+   // friends
+
+  //getAllFriends();
+  /*
+  function getAllFriends() {
+     FB.api('/me/friends', function(response) {
+          //console.log(response['data']);
+          for (var i=0;i<response['data'].length;i++) {
+
+              //id: response['data'][i].id
+              //name: response['data'][i].name
+
+            consol//e.log(response['data'][i].id)
+            console.  /*log(response['data'][i].name)
+          }
+     });
+   }
+  */
+
+  };
+</script>
+
+
+<button onClick="logout()">Log out</button>
+</body>
+</html>
