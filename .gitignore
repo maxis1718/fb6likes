@@ -1,4 +1,6 @@
 node_modules
 .env
+*.swp
+*.swo
 Dockerfile
 docker-compose.yml

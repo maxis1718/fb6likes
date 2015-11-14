@@ -1,16 +1,32 @@
+.jose {
+    font-family: 'Josefin Sans', sans-serif!important;
+}
+
+.dosis {
+    font-family: 'Dosis', sans-serif!important;
+}
+
+.bg-fb {
+    background: #344b8d;
+}
+
 body {
     width: 100%;
     clear: both;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif!important;
-}
-h1 {
-    font-size: 64px;
 }
 
-.bg-fb {
-    background: #344b8d;
+.section .next {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    width: 64px;
+    height: 64px;
+    background: red;
+    text-align: center;
+    line-height: 64px;
+    border-radius: 50%;
 }
 
 .section-title {
@@ -21,10 +37,15 @@ h1 {
     padding-top: 50px;
     text-align: center;
 }
+.section-title h1 {
+    font-size: 72px;
+}
 
+.section-title .fb-login-button-wrap {
+    margin-top: 24px;
+}
 
-
-.fb-login-button {
+.section-title .fb-login-button {
     width: 80px;
     height: 25px;
     position: 
