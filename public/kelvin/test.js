@@ -199,7 +199,8 @@ function genDistance(data) {
         ret.push({
             id: id,
             img: dat.pictures,
-            dis: dist[id]
+            dis: dist[id],
+            likedPosts: likedPosts[id].map(function(pid) { return posts[pid]; })
         });
     }
     return ret;
