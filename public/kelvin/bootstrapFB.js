@@ -1,10 +1,11 @@
 window.fbAsyncInit = function() {
+    var appid = APPID;
     FB.init({
-        appId      : APPID,
+        appId      : appid,
         xfbml      : true,
         version    : API_VERSION
     });
-    console.log('FB.init() called!');
+    console.log('FB.init(), APPID:', appid);
     /*FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
             // the user is logged in and has authenticated your
