@@ -19,8 +19,8 @@ $(document).ready(function() {
 
     $('.topic-input').keyup(function(e){
         if (e.keyCode === 13 || e.which === 13) {
-            var drawBtn = $(this);
             var queries = getQuery($(this));
+            var drawBtn = $('.draw-warp');
             drawBtn.find('.fa').toggleClass('d-n');
             mainFunc(queries).then(function(res) {
                 drawBtn.find('.fa').toggleClass('d-n');
