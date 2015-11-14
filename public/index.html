@@ -20,15 +20,24 @@
     <link rel="stylesheet" href="css/font-awesome.css" type="text/css">
     <link rel="stylesheet" href="css/main.css" type="text/css">
 
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+
 </head>
 
 <body>
-    <div id="container">
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=112073622314908";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <div class="container">
         <header class="row col-lg-12 col-md-12 col-xs-12 col-sm-12 fb6likes">
-            <div>fb6likes</div>
-            <div>
-                <button>login</button>
-            </div>
+            <div class="d-ib header-title">fb6likes</div>
+            <div class="d-ib fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
         </header>
         <section class="row col-lg-12 col-md-12 col-xs-12 col-sm-12">
             put d3 graph here

@@ -10,7 +10,7 @@ Github: [https://github.com/maxis1718/fb6likes](https://github.com/maxis1718/fb6
 $ git clone git@github.com:maxis1718/fb6likes.git
 $ cd fb6likes
 $ npm install
-$ nodemon
+$ sudo nodemon
 ```
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
