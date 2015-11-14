@@ -18,6 +18,11 @@
     display: inline-block;
 }
 
+.c-w {
+    color: white;
+}
+
+
 h1, h2, h3, h4 {
     margin-top: 20px;
     margin-bottom: 10px;
@@ -33,6 +38,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 h1 {
     margin: 0.67em 0;
     font-size: 2em;
+    font-size: 72px;
 }
 h4 {
     font-size: 18px;

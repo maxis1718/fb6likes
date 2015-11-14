@@ -24,16 +24,17 @@
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.fullpage.min.js"></script>
+    <script type="text/javascript" src="js/lib.js"></script>
     <script type="text/javascript" src="js/d3.min.js"></script>
 
 </head>
 
-<body>
+<body class="c-w">
     <div id="fb-root"></div>
     <script type="text/javascript" src="js/fb-login.js"></script>
 
     <div id="fullpage">
-        <div class="section active bg-fb">
+        <div class="section active">
             <div class="section-title">
                 <div>
                     <h1 class="jose">fb6likes</h1>
@@ -45,6 +46,14 @@
                     <div class="fb-login-btn d-n fb-btn">Login</div>
                     <div class="fb-logout-btn d-n fb-btn">Logout</div>
                 </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="input-wrap">
+                <div>
+                    <h1 class="jose">topic</h1>
+                </div>
+                <input type="text" class="topic-input jose c-w" />
             </div>
         </div>
         <div class="section d3-container"></div>
