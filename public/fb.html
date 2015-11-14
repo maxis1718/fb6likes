@@ -4,12 +4,13 @@
 <script>
   /* All Facebook functions should be included 
      in this function, or at least initiated from here */
+     console.log("p");
   window.fbAsyncInit = function() {
     FB.init({appId: '1006235269435798', 
              status: true, 
              cookie: true,
          xfbml: true});
-
+    console.log("a");
     FB.api('/me', function(response) {
       console.log(response.name);
     });
