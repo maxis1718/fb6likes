@@ -66,4 +66,4 @@ function mainFunc() {
 }
 
 //export var main = test;
-main = mainFunc;
+main = thisShouldWork;
