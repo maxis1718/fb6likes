@@ -102,4 +102,5 @@ function thisShouldWork() {
         }
         // doTheThing end
     };
+    return false;
 }
