@@ -40,11 +40,11 @@ function fetchFeed(uid) {
         'description'
     ];
     var req = '/' + uid + '/feed?fields=' + fieldWeCare.join(',');
-    return promisedRequest(req);
+    return promisedRequest(req).then(function(res) { return { uid:uid, feed:res }; })
 }
 
 function fetchAllFeed(targets) {
-    var ids = targets.map(function(x) { return x.id; });
+    var ids = ['me'].concat(targets.map(function(x) { return x.id; }));
     var reqs = ids.map(function(id) { return fetchFeed(id); });
     console.log(reqs);
     return Promise.all(reqs);
@@ -55,7 +55,7 @@ function test() {
     fetchMyFriend().
     then(dumpRes).
     then(fetchAllFeed).
-    then(dumpRes);
+    then(dumpRes)
     //testRequest('/me/feed');
     //testRequest(getFriendRequest(KELVIN));
     //console.log(get_feed())
