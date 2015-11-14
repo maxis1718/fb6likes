@@ -12,6 +12,7 @@
          xfbml: true});
     console.log("a");
     FB.api('/me', function(response) {
+      console.log(response);
       console.log(response.name);
     });
   };
