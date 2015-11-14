@@ -42,7 +42,6 @@ function preprocessFeedArr(arr) {
 }
 
 function fetchFeed(uid, pictures) {
-    console.log(pictures);
     var fieldWeCare = [
         'message',
         'link',
