@@ -85,7 +85,8 @@ function update() {
       .style("fill", function(d) {
         return "url(#image" + d.id + ")";
       })
-	    .on('click', click)
+	  .on('mouseenter', enter)
+	  .on('mouseleave', leave)
       .call(force.drag);
 
   // Exit any old nodes.
@@ -125,34 +126,31 @@ function flatten(root) {
  * Attach a context menu to a D3 element
  */
 
-contextMenuShowing = false;
-
-function click(d, i) {
+function leave(d, i){
 	d3.event.preventDefault();
-	if (contextMenuShowing) {
-		d3.select(".popup").remove();
-	} else {
-		if(d.name=="flare" || d.likedPosts.length===0) return;
-		popup = d3.select(".d3-container")
-					.append("div")
-					.attr("class", "popup")
-					.style("left", "8px")
-					.style("top", "8px");
-		for(var text in d.likedPosts){
-			text = d.likedPosts[text];
-			if(text.message)
-				popup.append("h2")
-					 .append("a").attr("href",text.link)
-					 .text(text.message);
-			else
-				popup.append("h2")
-					 .append("a").attr("href",text.link)
-			 		 .text(text.name);
-			if(text.description){
-				content = text.description.length > 50 ? text.description.substr(0,50)+"..." : text.description;
-				popup.append("p").text(content);
-			}
+	d3.select(".popup").remove();
+}
+
+function enter(d, i) {
+	if(d.name=="flare" || d.likedPosts.length===0) return;
+	popup = d3.select(".d3-container")
+				.append("div")
+				.attr("class", "popup")
+				.style("left", "8px")
+				.style("top", "8px");
+	for(var text in d.likedPosts){
+		text = d.likedPosts[text];
+		if(text.message)
+			popup.append("h2")
+				 .append("a").attr("href",text.link)
+				 .text(text.message);
+		else
+			popup.append("h2")
+				 .append("a").attr("href",text.link)
+		 		 .text(text.name);
+		if(text.description){
+			content = text.description.length > 50 ? text.description.substr(0,50)+"..." : text.description;
+			popup.append("p").text(content);
 		}
 	}
-	contextMenuShowing = !contextMenuShowing;
 }
