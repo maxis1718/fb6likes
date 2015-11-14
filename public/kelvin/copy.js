@@ -1,4 +1,5 @@
 function thisShouldWork() {
+    console.log('yep');
 
     window.fbAsyncInit = function() {
         FB.init({
