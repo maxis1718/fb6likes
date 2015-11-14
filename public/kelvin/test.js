@@ -65,9 +65,12 @@ function fetchFeed(uid, pictures) {
 }
 
 function fetchAllFeed(targets) {
-    var pics = [].concat(targets.map(function(p) { return p.picture; }));
+    var pics = [];
+    for (var i=0;i<targets.length;i++) {
+        pics.push(JSON.stringify(targets[i].picture.data.url));
+    }
     var ids = ['me'].concat(targets.map(function(x) { return x.id; }));
-    var reqs = ids.map(function(id) { return fetchFeed(id, pics[0].data.url); });
+    var reqs = ids.map(function(id,key) { return fetchFeed(id, pics[key]); });
     return Promise.all(reqs);
 }
 
