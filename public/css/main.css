@@ -159,21 +159,36 @@ body {
     left: 0;
     top: 0;
     background-color: #fff;
-    width: 250px;
-    border: 1px #ccc solid;
-    border-radius: 6px;
-    box-shadow: #333 2px 2px 4px;
+    min-width: 250px;
+    width: 30%;
+    border-right: 1px solid #ccc;
+    /*border-radius: 6px;*/
     padding: 8px;
-    font-family: arial, helvetica, sans-serif;
+    font-family: helvetica, arial, sans-serif;
 	overflow: scroll;
-	height: 95%;
+	height: 100%;
 	color: gray;
+    padding: 16px;
+    line-height: 1.2em;
 }
+
 .d3-container .popup h2 {
     margin: 0 0 1rem 0;
 	color:black;
-	font-size: 0.9em;
+    border-top: 1px solid #ddd;
+    padding-top: 16px;
+    font-size: 18px;
+    line-height: 18px;
+    height: 18px;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;    
 }
+
+.d3-container .popup h2:first-child {
+    border-top: 0;
+}
+
 .d3-container .popup a{
 	text-decoration: none;
 }

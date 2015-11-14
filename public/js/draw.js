@@ -147,17 +147,17 @@ function enter(d, i) {
 	popup = d3.select(".d3-container")
 				.append("div")
 				.attr("class", "popup")
-				.style("left", "8px")
-				.style("top", "8px");
+				.style("left", "0px")
+				.style("top", "0px");
 	for(var text in d.likedPosts){
 		text = d.likedPosts[text];
 		if(text.message)
 			popup.append("h2")
-				 .append("a").attr("href",text.link)
+				 .append("a").attr("href",text.link).attr('target', '_blank')
 				 .text(text.message);
 		else
 			popup.append("h2")
-				 .append("a").attr("href",text.link)
+				 .append("a").attr("href",text.link).attr('target', '_blank')
 		 		 .text(text.name);
 		if(text.description){
 			content = text.description.length > 50 ? text.description.substr(0,50)+"..." : text.description;
