@@ -206,11 +206,13 @@ function genDistance(data) {
     return ret;
 }
 
-function test() {
-    var queryTerm = '馬習會';
+function test(queryArray) {
+    //var queryTerm = '馬習會';
     //var regexMatcher = /馬習|馬囧|賣國/;
     //var regexMatcher = /台灣|中國|兩岸/;
-    var regexMatcher = /台灣|中國|兩岸|棒球|中華/;
+    //var regexMatcher = /台灣|中國|兩岸|棒球|中華/;
+    var regexString = queryArray.join('|');
+    var regexMatcher = new RegExp(regexString);
     //testRequest('/me/friends');
     Promise.all([fetchMe(), fetchMyFriend()]).
     then(function(ans) { return [ans[0]].concat(ans[1]); }).
@@ -224,11 +226,16 @@ function test() {
     return false;
 }
 
-function mainFunc() {
-    loginIfNecessaryAndCall(test);
+function mainFunc(queryArray) {
+    loginIfNecessaryAndCall(test.bind(this, queryArray));
+    return false;
+}
+
+function qFunc() {
+    mainFunc(['台灣', '中國', '兩岸', '棒球', '中華']);
     return false;
 }
 
 //export var main = test;
 //main = thisShouldWork;
-main = mainFunc;
+main = qFunc;
