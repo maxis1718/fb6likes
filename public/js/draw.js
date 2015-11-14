@@ -7,12 +7,16 @@ var w = 1280,
 var force = d3.layout.force()
     .on("tick", tick)
     .charge(function(d) { return d._children ? -d.size / 100 : -30; })
-    .linkDistance(function(d) { return d.target._children ? 80 : 30; })
+    .linkDistance(function(d) { return d.target.dis })
     .size([w, h - 160]);
+
+
 
 var vis = d3.select(".d3-container").append("svg")
     .attr("width", w)
     .attr("height", h);
+
+var defs = vis.append('svg:defs');
 
 d3.json("flare.json", function(json) {
   root = json;
@@ -25,6 +29,22 @@ d3.json("flare.json", function(json) {
 function update() {
   var nodes = flatten(root),
       links = d3.layout.tree().links(nodes);
+
+var imgs = [];
+  for(n in nodes){
+              var tmp = defs.append("svg:pattern")
+                                              .attr("id", "image"+nodes[n].id)
+                                              .attr("width", 60/4)
+                                              .attr("height", 60/4)
+                                              .attr("patternUnits", "objectBoundingBox")
+                                              .append("svg:image")
+                                              .attr("xlink:href", nodes[n].img)
+                                              .attr("width", 60)
+                                              .attr("height", 60)
+                                              .attr("x",0)
+                                              .attr("y",0);
+              imgs.push(tmp);
+      }
 
   // Restart the force layout.
   force
@@ -58,11 +78,12 @@ function update() {
   // Enter any new nodes.
   node.enter().append("svg:circle")
       .attr("class", "node")
-      .attr("cx", function(d) { return d.x; })
-      .attr("cy", function(d) { return d.y; })
-      .attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; })
-      .style("fill", color)
-      .on("click", click)
+      .attr("cx", function(d) { return 60/2; })
+      .attr("cy", function(d) { return 60/2; })
+      .attr("r", function(d) { return 60/2; })
+      .style("fill", function(d) {
+      	return "url(#image" + d.id + ")"; 
+      })
       .call(force.drag);
 
   // Exit any old nodes.
