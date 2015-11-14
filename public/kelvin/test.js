@@ -46,9 +46,20 @@ function fetchMe() {
 
 function preprocessFeedArr(arr) {
     arr.forEach(function(ele) {
+        var author = ele.from.id;
+        var check = false;
+        for (var i=0;i<ele.likes.data.length;i++) {
+            if (author === ele.likes.data[i].id) {
+                check = true;
+            }
+        }
+        if (check === false) {
+            ele.likes.data.push({id: author});
+        }
         ele.md5 = calcMD5(ele.message+ele.link);
     });
 }
+
 
 function fetchFeed(uid, pictures, regexMatcher) {
     var fieldWeCare = [
@@ -58,7 +69,8 @@ function fetchFeed(uid, pictures, regexMatcher) {
         'name',
         'caption',
         'description',
-        'likes'
+        'likes',
+        'from'
     ];
     var limit = 80;
     var req = '/' + uid + '/feed?fields=' + fieldWeCare.join(',') + '&limit=' + limit;
