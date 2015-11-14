@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('#fullpage').fullpage({
-        sectionsColor: ['#344b8d', '#233468', 'f5f5f5'],
+        sectionsColor: ['#344b8d', '#233468', '#f5f5f5'],
         anchors: ['home', 'query', 'graph'],
         scrollingSpeed: 1000
     });
