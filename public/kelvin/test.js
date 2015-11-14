@@ -145,8 +145,8 @@ function genDistance(data) {
     for(var i=0; i<n; i++) {
         id2index[data[i].uid] = i;
     }
-    console.log(ids);
-    console.log(id2index);
+    // console.log(ids);
+    // console.log(id2index);
     // fill posts object
     data.forEach(function(ele) {
         var feeds = ele.feed;
@@ -195,8 +195,8 @@ function genDistance(data) {
     }
     dist[myId] = 0;
     //console.log(likedPosts);
-    console.log(score);
-    console.log(dist);
+    // console.log(score);
+    // console.log(dist);
     
     // return format
     // ret: [
@@ -229,22 +229,18 @@ function test(queryArray) {
     var regexString = queryArray.join('|');
     var regexMatcher = new RegExp(regexString);
     //testRequest('/me/friends');
-    Promise.all([fetchMe(), fetchMyFriend()]).
+    return Promise.all([fetchMe(), fetchMyFriend()]).
     then(function(ans) { return [ans[0]].concat(ans[1]); }).
-    then(dumpRes).
+    //then(dumpRes).
     then(feedFetcher(regexMatcher).fetchAllFeed).
-    then(dumpRes).
+    //then(dumpRes).
     then(genDistance).
     then(draw).
     then(dumpRes);
-    //testRequest('/me/feed');
-    //testRequest(getFriendRequest(KELVIN));
-    return false;
 }
 
 function mainFunc(queryArray) {
-    loginIfNecessaryAndCall(test.bind(this, queryArray));
-    return false;
+    loginIfNecessaryAndCall(test.bind(this, queryArray)).then(dumpRes);
 }
 
 function qFunc() {
