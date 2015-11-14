@@ -130,22 +130,26 @@ function click(d, i) {
 	if (contextMenuShowing) {
 		d3.select(".popup").remove();
 	} else {
+		if(d.name=="flare" || d.likedPosts.length===0) return;
 		popup = d3.select(".d3-container")
-		.append("div")
-		.attr("class", "popup")
-		.style("left", "8px")
-		.style("top", "8px");
+					.append("div")
+					.attr("class", "popup")
+					.style("left", "8px")
+					.style("top", "8px");
 		for(var text in d.likedPosts){
-			if(d.likedPosts[text].message)
+			text = d.likedPosts[text];
+			if(text.message)
 				popup.append("h2")
-					 .append("a").attr("href",d.likedPosts[text].link)
-					 .text(d.likedPosts[text].message);
+					 .append("a").attr("href",text.link)
+					 .text(text.message);
 			else
 				popup.append("h2")
-					 .append("a").attr("href",d.likedPosts[text].link)
-			 		 .text(d.likedPosts[text].name);
-			if(d.likedPosts[text].description)
-				popup.append("p").text(d.likedPosts[text].description.substr(0,50)+"...");
+					 .append("a").attr("href",text.link)
+			 		 .text(text.name);
+			if(text.description){
+				content = text.description.length > 50 ? text.description.substr(0,50)+"..." : text.description;
+				popup.append("p").text(content);
+			}
 		}
 	}
 	contextMenuShowing = !contextMenuShowing;
