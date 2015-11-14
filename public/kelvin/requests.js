@@ -7,5 +7,3 @@ function getFeedRequest(uid) {
     var req = '/' + uid + ACTION_FEED;
     return req;
 }
-
-
