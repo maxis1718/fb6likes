@@ -13,25 +13,21 @@
      stroke-width: 1.5px;
     }
 
-    .node.a { fill: #ff7f0e;}
-    .node.b { fill: #2ca02c;}
-    .node.c { fill: #2ca02c;}
-    .node.d { fill: #2ca02c;}
-
-
     </style>
     <body>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script>
 
-    var width = 960,
-        height = 500,
+    var width = 1000,
+        height = 800,
 		circle_width = 80;
 
     var color = d3.scale.category10();
 
     var nodes = [],
-        links = [];
+        links = [],
+		imgs = [];
 
     var force = d3.layout.force()
     .nodes(nodes)
@@ -40,58 +36,54 @@
     .size([width, height])
     .on("tick", tick);
 
-force.linkDistance(function(link){
-	return link.dis;
-});
+	force.linkDistance(function(link){
+		return link.dis;
+	});
 
     var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
 	var defs = svg.append('svg:defs');
-	
-	defs.append("svg:pattern")
-		.attr("id", "imagea")
-		.attr("width", circle_width)
-		.attr("height", circle_width)
-		.attr("patternUnits", "userSpaceOnUse")
-		.append("svg:image")
-		.attr("xlink:href", "./wemy.jpg")
-		.attr("width", circle_width)
-		.attr("height", circle_width)
-		.attr("x",0)
-		.attr("y",0);
-
-	defs.append("svg:pattern")
-		.attr("id", "imageb")
-		.attr("width", circle_width)
-		.attr("height", circle_width)
-		.attr("patternUnits", "userSpaceOnUse")
-		.append("svg:image")
-		.attr("xlink:href", "./jingfei.jpg")
-		.attr("width", circle_width)
-		.attr("height", circle_width)
-		.attr("x",0)
-		.attr("y",0);
 
     var node = svg.selectAll(".node"),
     link = svg.selectAll(".link");
 
 
     setTimeout(function() {
-     var a = {id: "a"}, b = {id: "b"}, c = {id: "c"},d = {id: "d"};
+		$.getJSON("./example.json",function(data){
+			var first="", i=0;
+			$.each(data, function(key, val){
+				++i;
+			    var tmp = {id: val.id, img: val.img}; 
+			
+			    nodes.push(tmp);
+				if(first==="") first=val.id;
+				else
+				    links.push({source: first, target: val.id, dis: val.dis});
+			});
+		});
+		start();
 
-    nodes.push(a, b, c, d);
-    links.push(
-		{source: a, target: b, dis:120}, 
-		{source: a, target: c, dis:180},
-		{source: a, target: d, dis:150});
-    start();
     }, 0);
 
-
-
     function start() {
+		for(n in nodes){
+			console.log(nodes[n].img);
+			var tmp = defs.append("svg:pattern")
+							.attr("id", "image"+nodes[n].id)
+							.attr("width", circle_width/4)
+							.attr("height", circle_width/4)
+							.attr("patternUnits", "objectBoundingBox")
+							.append("svg:image")
+							.attr("xlink:href", nodes[n].img)
+							.attr("width", circle_width)
+							.attr("height", circle_width)
+							.attr("x",0)
+							.attr("y",0);
+			imgs.push(tmp);
+		}
+
      link = link.data(force.links(), function(d) { return d.source.id + "-" + d.target.id; });
      link.enter().insert("line", ".node").attr("class", "link");
      link.exit().remove();
