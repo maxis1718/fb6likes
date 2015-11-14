@@ -4,7 +4,11 @@
     <title>FB x GIT Hack For A Cause Taiwan</title>
 </head>
 <body>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
+$( document ).ready(function() {
+
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '1006304879428837',
@@ -59,32 +63,33 @@
 
   function doTheThing() {
 
-    /*
-      10208453813091473 Huang Chao-Ju
-      10204923084869530 Kelvin Yang
-      1077717378914836 Maxis Kao
-    */
+      /*
+        10208453813091473 Huang Chao-Ju
+        10204923084869530 Kelvin Yang
+        1077717378914836 Maxis Kao
+      */
 
-    function getAllFriendsID() {
-       FB.api('/me/friends', function(response) {
-            //console.log(response['data']);
-            for (var i=0;i<response['data'].length;i++) {
-              //id: response['data'][i].id
-              //name: response['data'][i].name
-              //console.log(response['data'][i].id);
-              //console.log(response['data'][i].name);
-              getTargetFriendsFeed(response['data'][i].id);
-            }
-       });
-    }
+      function genHashMD5(text) {
+        return CryptoJS.MD5(text);
+      }
 
-    getAllFriendsID();
+      function getAllFriendsID() {
+         FB.api('/me/friends', function(response) {
+              //console.log(response['data']);
+              for (var i=0;i<response['data'].length;i++) {
+                //id: response['data'][i].id
+                //name: response['data'][i].name
+                //console.log(response['data'][i].id);
+                //console.log(response['data'][i].name);
+                getTargetFriendsFeed(response['data'][i].id);
+              }
+         });
+      }
 
-    // get msg from Kelvin Yang
-    // getTargetFriendsFeed('10204923084869530');
+      //getAllFriendsID();
 
-     function getTargetFriendsFeed(feed_id) {
-        FB.api('/' + feed_id + '/feed?fields=message,link,story,name,caption,description', function(feed) {
+      function getTargetFriendsFeed(feed_id) {
+        FB.api('/' + feed_id + '/feed?fields=message,link,story,name,caption,description,likes', function(feed) {
            //console.log( JSON.stringify(feed.data));
            //console.log('---');
            for (var i=0;i<feed['data'].length;i++) {
@@ -105,8 +110,8 @@
            }
         });
      }
-     // doTheThing end
   };
+});
 </script>
 
 <button onClick="logout()">Log out</button>
