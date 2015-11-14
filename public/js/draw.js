@@ -13,7 +13,8 @@ var node,
 
 var force = d3.layout.force()
     .on("tick", tick)
-    .charge(-50)
+    .charge(-2)
+    .gravity(0.01)
     .linkDistance(function(d) { return d.target.dis })
     .size([w, h - 160]);
 

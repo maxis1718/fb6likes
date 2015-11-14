@@ -6,7 +6,7 @@ function dumpRes(res) {
 /*function draw(res) {
     var selfNode = res.shift();
     res.forEach(function(node) {
-      node.dis *= 500;
+      node.dis *= 400;
     });
 
     root = {
