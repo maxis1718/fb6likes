@@ -1,3 +1,3 @@
-function switchTo () {
-	location.href = '#graph'
+function navTo (section) {
+	location.href = '#' + section;
 }
