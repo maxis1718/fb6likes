@@ -3,22 +3,6 @@ function dumpRes(res) {
     return res;
 }
 
-/*function draw(res) {
-    var selfNode = res.shift();
-    res.forEach(function(node) {
-      node.dis *= 400;
-    });
-
-    root = {
-      "name": "flare",
-      "img": selfNode.img,
-      "children": res
-    };
-    update();
-    navTo('graph');
-    return res;
-}*/
-
 function testRequest(req) {
     console.log(req);
     FB.api(req, function(res) { console.log(res); });
