@@ -3,22 +3,6 @@ function dumpRes(res) {
     return res;
 }
 
-function draw(res) {
-    var selfNode = res.shift();
-    res.forEach(function(node) {
-      node.dis *= 500;
-    });
-
-    root = {
-      "name": "flare",
-      "img": selfNode.img,
-      "children": res
-    };
-    update();
-    navTo('graph');
-    return res;
-}
-
 function testRequest(req) {
     console.log(req);
     FB.api(req, function(res) { console.log(res); });
@@ -62,9 +46,20 @@ function fetchMe() {
 
 function preprocessFeedArr(arr) {
     arr.forEach(function(ele) {
+        var author = ele.from.id;
+        var check = false;
+        for (var i=0;i<ele.likes.data.length;i++) {
+            if (author === ele.likes.data[i].id) {
+                check = true;
+            }
+        }
+        if (check === false) {
+            ele.likes.data.push({id: author});
+        }
         ele.md5 = calcMD5(ele.message+ele.link);
     });
 }
+
 
 function fetchFeed(uid, pictures, regexMatcher) {
     var fieldWeCare = [
@@ -74,7 +69,8 @@ function fetchFeed(uid, pictures, regexMatcher) {
         'name',
         'caption',
         'description',
-        'likes'
+        'likes',
+        'from'
     ];
     var limit = 80;
     var req = '/' + uid + '/feed?fields=' + fieldWeCare.join(',') + '&limit=' + limit;
@@ -146,8 +142,8 @@ function genDistance(data) {
     for(var i=0; i<n; i++) {
         id2index[data[i].uid] = i;
     }
-    console.log(ids);
-    console.log(id2index);
+    // console.log(ids);
+    // console.log(id2index);
     // fill posts object
     data.forEach(function(ele) {
         var feeds = ele.feed;
@@ -196,8 +192,8 @@ function genDistance(data) {
     }
     dist[myId] = 0;
     //console.log(likedPosts);
-    console.log(score);
-    console.log(dist);
+    // console.log(score);
+    // console.log(dist);
     
     // return format
     // ret: [
@@ -228,28 +224,23 @@ function test(queryArray) {
     //var regexMatcher = /台灣|中國|兩岸/;
     //var regexMatcher = /台灣|中國|兩岸|棒球|中華/;
     var regexString = queryArray.join('|');
-    var regexMatcher = new RegExp(regexString);
+    var regexMatcher = new RegExp(regexString, 'i');
     //testRequest('/me/friends');
-    Promise.all([fetchMe(), fetchMyFriend()]).
+    return Promise.all([fetchMe(), fetchMyFriend()]).
     then(function(ans) { return [ans[0]].concat(ans[1]); }).
-    then(dumpRes).
+    //then(dumpRes).
     then(feedFetcher(regexMatcher).fetchAllFeed).
-    then(dumpRes).
-    then(genDistance).
-    then(draw).
-    then(dumpRes);
-    //testRequest('/me/feed');
-    //testRequest(getFriendRequest(KELVIN));
-    return false;
+    //then(dumpRes).
+    then(genDistance);
+    //then(draw).
 }
 
 function mainFunc(queryArray) {
-    loginIfNecessaryAndCall(test.bind(this, queryArray));
-    return false;
+    return loginIfNecessaryAndCall(test.bind(this, queryArray));
 }
 
 function qFunc() {
-    mainFunc(['台灣', '中國', '兩岸', '棒球', '中華']);
+    mainFunc(['台灣', '中國', '兩岸', '棒球', '中華']).then(dumpRes);
     return false;
 }
 

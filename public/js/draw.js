@@ -13,7 +13,8 @@ var node,
 
 var force = d3.layout.force()
     .on("tick", tick)
-    .charge(-50)
+    .charge(-2)
+    .gravity(0.01)
     .linkDistance(function(d) { return d.target.dis })
     .size([w, h - 160]);
 
@@ -104,18 +105,6 @@ function color(d) {
   return d._children ? "#3182bd" : d.children ? "#c6dbef" : "#fd8d3c";
 }
 
-// Toggle children on click.
-//function click(d) {
-//  if (d.children) {
-//    d._children = d.children;
-//    d.children = null;
-//  } else {
-//    d.children = d._children;
-//    d._children = null;
-//  }
-//  update();
-//}
-
 // Returns a list of all nodes under the root.
 function flatten(root) {
   var nodes = [], i = 0;
@@ -137,22 +126,31 @@ function flatten(root) {
 contextMenuShowing = false;
 
 function click(d, i) {
-		d3.event.preventDefault();
-		if (contextMenuShowing) {
+	d3.event.preventDefault();
+	if (contextMenuShowing) {
 		d3.select(".popup").remove();
-		} else {
+	} else {
+		if(d.name=="flare" || d.likedPosts.length===0) return;
 		popup = d3.select(".d3-container")
-		.append("div")
-		.attr("class", "popup")
-		.style("left", "8px")
-		.style("top", "8px");
-		popup.append("h2").text(d.display_division);
-		popup.append("p").text(
-			"The " + d.display_division + " division (wearing " + d.display_color + " uniforms) had " + d.casualties + " casualties during the show's original run.")
-		popup.append("p")
-		.append("a")
-		.attr("href","http://google.com")
-		.text("testtesttest");
+					.append("div")
+					.attr("class", "popup")
+					.style("left", "8px")
+					.style("top", "8px");
+		for(var text in d.likedPosts){
+			text = d.likedPosts[text];
+			if(text.message)
+				popup.append("h2")
+					 .append("a").attr("href",text.link)
+					 .text(text.message);
+			else
+				popup.append("h2")
+					 .append("a").attr("href",text.link)
+			 		 .text(text.name);
+			if(text.description){
+				content = text.description.length > 50 ? text.description.substr(0,50)+"..." : text.description;
+				popup.append("p").text(content);
+			}
 		}
-		contextMenuShowing = !contextMenuShowing;
-		}
+	}
+	contextMenuShowing = !contextMenuShowing;
+}

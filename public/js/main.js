@@ -19,15 +19,42 @@ $(document).ready(function() {
 
     $('.topic-input').keyup(function(e){
         if (e.keyCode === 13 || e.which === 13) {
-            // extract topics
             var queries = getQuery($(this));
-            mainFunc(queries);
+            mainFunc(queries).then(function(res) {
+                var selfNode = res.shift();
+                res.forEach(function(node) {
+                  node.dis *= 400;
+                });
+
+                root = {
+                  "name": "flare",
+                  "img": selfNode.img,
+                  "children": res
+                };
+                update();
+                navTo('graph');
+                return res;
+            });
         }
     });
 
     $('.draw-warp').click(function(e){
         var queries = getQuery($('.topic-input'));
-        mainFunc(queries);
+        mainFunc(queries).then(function(res) {
+            var selfNode = res.shift();
+            res.forEach(function(node) {
+              node.dis *= 400;
+            });
+
+            root = {
+              "name": "flare",
+              "img": selfNode.img,
+              "children": res
+            };
+            update();
+            navTo('graph');
+            return res;
+        });
     });
 
     $('.option').click(function(e){
