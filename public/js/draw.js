@@ -28,6 +28,8 @@ root.fixed = true;
 root.x = w / 2;
 root.y = h / 2 - 80;
 
+var pinned = false;
+
 function update() {
   var nodes = flatten(root),
       links = d3.layout.tree().links(nodes),
@@ -87,6 +89,7 @@ function update() {
       })
 	  .on('mouseenter', enter)
 	  .on('mouseleave', leave)
+      .on('click',handlePin)
       .call(force.drag);
 
   // Exit any old nodes.
@@ -128,11 +131,19 @@ function flatten(root) {
 
 function leave(d, i){
 	d3.event.preventDefault();
-	d3.select(".popup").remove();
+    if(!pinned) {
+        d3.select(".popup").remove();
+    }
 }
 
 function enter(d, i) {
 	if(d.name=="flare" || d.likedPosts.length===0) return;
+    //
+    pinned = false;
+    if(d3.select(".popup")) {
+        d3.select(".popup").remove();
+    }
+    //
 	popup = d3.select(".d3-container")
 				.append("div")
 				.attr("class", "popup")
@@ -153,4 +164,8 @@ function enter(d, i) {
 			popup.append("p").text(content);
 		}
 	}
+}
+
+function handlePin(d, i) {
+    pinned = true;
 }
