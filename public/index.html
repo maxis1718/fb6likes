@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <!-- cache : off -->
-    <meta http-equiv="cache-control" content="no-cache">
+<!--     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="expires" content="0">
+    <meta http-equiv="expires" content="0"> -->
    
     <title>fb6likes</title>
 
@@ -20,8 +20,13 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.css" type="text/css">
     <link rel="stylesheet" href="css/main.css" type="text/css">
-
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,300|Dosis:400,200' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'> -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.fullpage.min.js"></script>
+    <script type="text/javascript" src="js/d3.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-extras.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
 
 </head>
 
@@ -31,28 +36,29 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=112073622314908";
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1006235269435798";
         fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <div id="fullpage">
         <div class="section active bg-fb">
             <div class="section-title">
-                <h1>fb6likes</h1>
-                <h4 class="">聽聽不同的聲音</h4>
-                <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
+                <div>
+                    <h1 class="jose">fb6likes</h1>
+                </div>
+                <div>
+                    <h4>聽聽不同的聲音</h4>
+                </div>
+                <div class="fb-login-button-wrap">
+                    <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
+                </div>
             </div>
         </div>
-        <div class="section">Some section</div>
+        <div class="section">d3</div>
         <div class="section">Some section</div>
         <div class="section">Some section</div>
     </div>
 
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.fullpage.min.js"></script>
-    <script type="text/javascript" src="js/d3.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap-extras.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 
