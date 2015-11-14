@@ -11,6 +11,17 @@
       xfbml      : true,
       version    : 'v2.5'
     });
+
+    FB.login(function(response) {
+      if (response.authResponse) {
+         console.log('Welcome!  Fetching your information.... ');
+         FB.api('/me', function(response) {
+           console.log('Good to see you, ' + response.name + '.');
+         });
+        } else {
+         console.log('User cancelled login or did not fully authorize.');
+        }
+    });
   };
 
   (function(d, s, id){
@@ -21,12 +32,5 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
-
-<div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div>
 </body>
 </html>
