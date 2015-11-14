@@ -1,9 +1,3 @@
-// sample query for a person's feed
-// 100000297530259/feed
-
-// sample query for a feed's like
-// 100000297530259_1077621612257746/likes
-
 function dumpRes(res) {
     console.log(res);
     return res;
@@ -66,7 +60,7 @@ function fetchFeed(uid, pictures, regexMatcher) {
         'description',
         'likes'
     ];
-    var limit = 100;
+    var limit = 80;
     var req = '/' + uid + '/feed?fields=' + fieldWeCare.join(',') + '&limit=' + limit;
     return promisedRequest(req).then(function(res) {
         var feedArr = res.data;
@@ -100,6 +94,14 @@ function feedFetcher(regexMatcher) {
     };
 }
 
+function calcDist(score, maxScore) {
+    var minDist = 0.3;
+    var maxDist = 1.0;
+    // linear
+    var linDist = minDist + (maxScore-score)*(maxDist-minDist)/maxScore;
+    return linDist;
+}
+
 function genDistance(data) {
     // format:
     // data: [
@@ -114,7 +116,6 @@ function genDistance(data) {
     //   ...
     // ]
     var n = data.length;
-    var score = Array.apply(null, Array(n)).map(Number.prototype.valueOf,0);
     var id2index = {};
     var ids;
     var posts = {
@@ -136,23 +137,52 @@ function genDistance(data) {
         var feeds = ele.feed;
         feeds.forEach(function(feed) {
             var p = posts[feed.md5] = _.clone(feed);
+            //console.log(p);
+            if(!p.likes) p.likes = {data: []};
             p.likes = p.likes.data.map(function(x) { return x.id; });
             p.likes = p.likes.filter(function(x) { return ids.indexOf(x)>=0; });
             //console.log(p.likes.length);
-            console.log(p.likes);
+            //console.log(p.likes);
         });
     });
+    // calc score
+    //var score = Array.apply(null, Array(n)).map(Number.prototype.valueOf,0);
+    //var likedPosts = Array.apply(null, Array(n)).map(Array.prototype.valueOf,[]);
+    var score = {};
+    var likedPosts = {};
+    for (var i=0; i<ids.length; i++) {
+        var id = ids[i];
+        score[id] = 0;
+        likedPosts[id] = [];
+    }
     //
+    var myId = ids[0];
     for(var md5 in posts) {
         var post = posts[md5];
         var likes = post.likes;
         //console.log(post);
-        //console.log(likes);
+        // console.log(likes);
+        var iLiked = likes.indexOf(myId)>=0;
         likes.forEach(function(id) {
-            
+            likedPosts[id].push(md5);
+            if(id!=myId && iLiked) score[id]++;
         });
     }
-    // calc score
+    var maxScore = 0;
+    for(var id in score) {
+        maxScore = Math.max(maxScore, score[id]);
+    }
+    // var maxScore = score.reduce(function(s,x) { return Math.max(s,x); });
+    var dist = {};
+    for(var id in score) {
+        if(id != myId) dist[id] = calcDist(score[id], maxScore);
+        //dist = score.map(function(s) { return calcDist(s, maxScore); });
+    }
+    dist[myId] = 0;
+    //console.log(likedPosts);
+    console.log(score);
+    console.log(dist);
+    
     // return format
     // ret: [
     //   {
@@ -162,23 +192,34 @@ function genDistance(data) {
     //   },
     //   ...
     // ]
+    var ret = [];
+    for (var i=0; i<n; i++) {
+        var dat = data[i];
+        var id = dat.uid;
+        ret.push({
+            id: id,
+            img: dat.pictures,
+            dis: dist[id]
+        });
+    }
+    return ret;
 }
 
 function test() {
     var queryTerm = '馬習會';
     //var regexMatcher = /馬習|馬囧|賣國/;
-    var regexMatcher = /台灣|中國|兩岸/;
+    //var regexMatcher = /台灣|中國|兩岸/;
+    var regexMatcher = /台灣|中國|兩岸|棒球|中華/;
     //testRequest('/me/friends');
     Promise.all([fetchMe(), fetchMyFriend()]).
     then(function(ans) { return [ans[0]].concat(ans[1]); }).
     then(dumpRes).
     then(feedFetcher(regexMatcher).fetchAllFeed).
     then(dumpRes).
-    then(genDistance);
+    then(genDistance).
+    then(dumpRes);
     //testRequest('/me/feed');
     //testRequest(getFriendRequest(KELVIN));
-    //console.log(get_feed())
-    //testRequest('/' + KELVIN + '/feed?fields=message,link,story,name,caption,description');
     return false;
 }
 
