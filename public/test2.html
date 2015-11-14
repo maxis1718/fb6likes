@@ -28,7 +28,7 @@
 
          // friends
          FB.api('/me/friends', function(response) {
-           console.log( response.data + '.');
+           console.log( JSON.stringify(response.data) + '.');
          });
 
         } else {
