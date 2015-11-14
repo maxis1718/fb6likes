@@ -229,4 +229,4 @@ function mainFunc() {
 
 //export var main = test;
 //main = thisShouldWork;
-main = test;
+main = mainFunc;
