@@ -17,8 +17,6 @@ var force = d3.layout.force()
     .linkDistance(function(d) { return d.target.dis })
     .size([w, h - 160]);
 
-
-
 var vis = d3.select(".d3-container").append("svg")
     .attr("width", w)
     .attr("height", h);
@@ -35,23 +33,20 @@ d3.json("flare.json", function(json) {
 
 function update() {
   var nodes = flatten(root),
-      links = d3.layout.tree().links(nodes);
-
-var imgs = [];
-  for(n in nodes){
-              var tmp = defs.append("svg:pattern")
-                                              .attr("id", "image"+nodes[n].id)
-                                              .attr("width", 60/4)
-                                              .attr("height", 60/4)
-                                              .attr("patternUnits", "objectBoundingBox")
-                                              .append("svg:image")
-                                              .attr("xlink:href", nodes[n].img)
-                                              .attr("width", 60)
-                                              .attr("height", 60)
-                                              .attr("x",0)
-                                              .attr("y",0);
-              imgs.push(tmp);
-      }
+      links = d3.layout.tree().links(nodes),
+      imgs = nodes.map(function(node, i) {
+      	return defs.append("svg:pattern")
+                   .attr("id", "image"+nodes[i].id)
+                   .attr("width", 60/4)
+                   .attr("height", 60/4)
+                   .attr("patternUnits", "objectBoundingBox")
+                   .append("svg:image")
+                   .attr("xlink:href", nodes[i].img)
+                   .attr("width", 60)
+                   .attr("height", 60)
+                   .attr("x",0)
+                   .attr("y",0);
+      });
 
   // Restart the force layout.
   force
