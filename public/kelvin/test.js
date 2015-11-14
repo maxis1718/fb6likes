@@ -56,7 +56,7 @@ function preprocessFeedArr(arr) {
     });
 }
 
-function fetchFeed(uid, regexMatcher) {
+function fetchFeed(uid, pictures, regexMatcher) {
     var fieldWeCare = [
         'message',
         'link',
@@ -77,7 +77,8 @@ function fetchFeed(uid, regexMatcher) {
         preprocessFeedArr(feedArr);
         return {
             uid:uid,
-            feed:feedArr
+            feed:feedArr,
+            pictures: pictures
         };
     });
 }
@@ -85,9 +86,15 @@ function fetchFeed(uid, regexMatcher) {
 function feedFetcher(regexMatcher) {
     return {
         fetchAllFeed: function(targets) {
+            var pics = [];
+            for (var i=0;i<targets.length;i++) {
+                pics.push(JSON.stringify(targets[i].picture.data.url));
+            }
             //var ids = ['me'].concat(targets.map(function(x) { return x.id; }));
             var ids = targets.map(function(x) { return x.id; });
-            var reqs = ids.map(function(id) { return fetchFeed(id, regexMatcher); });
+            //var reqs = ids.map(function(id,key) { return fetchFeed(id, pics[key]); });
+            //var reqs = ids.map(function(id) { return fetchFeed(id, regexMatcher); });
+            var reqs = ids.map(function(id,key) { return fetchFeed(id, pics[key], regexMatcher); });
             return Promise.all(reqs);
         }
     };
