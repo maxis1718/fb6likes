@@ -9,11 +9,11 @@ var h = window.innerHeight ||
 
 var node,
     link,
-    root;
+    root = {};
 
 var force = d3.layout.force()
     .on("tick", tick)
-    .charge(function(d) { return d._children ? -d.size / 100 : -30; })
+    .charge(-50)
     .linkDistance(function(d) { return d.target.dis })
     .size([w, h - 160]);
 
@@ -23,13 +23,9 @@ var vis = d3.select(".d3-container").append("svg")
 
 var defs = vis.append('svg:defs');
 
-d3.json("flare.json", function(json) {
-  root = json;
-  root.fixed = true;
-  root.x = w / 2;
-  root.y = h / 2 - 80;
-  update();
-});
+root.fixed = true;
+root.x = w / 2;
+root.y = h / 2 - 80;
 
 function update() {
   var nodes = flatten(root),

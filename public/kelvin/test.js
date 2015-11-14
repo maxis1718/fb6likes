@@ -3,6 +3,21 @@ function dumpRes(res) {
     return res;
 }
 
+function draw(res) {
+    var selfNode = res.shift();
+    res.forEach(function(node) {
+      node.dis *= 500;
+    });
+
+    root = {
+      "name": "flare",
+      "img": selfNode.img,
+      "children": res
+    };
+    update();
+    return res;
+}
+
 function testRequest(req) {
     console.log(req);
     FB.api(req, function(res) { console.log(res); });
@@ -218,6 +233,7 @@ function test() {
     then(feedFetcher(regexMatcher).fetchAllFeed).
     then(dumpRes).
     then(genDistance).
+    then(draw).
     then(dumpRes);
     //testRequest('/me/feed');
     //testRequest(getFriendRequest(KELVIN));
