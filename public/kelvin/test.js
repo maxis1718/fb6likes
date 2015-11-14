@@ -110,7 +110,7 @@ function calcDist(score, maxScore) {
     var minDist = 0.3;
     var maxDist = 1.0;
     // linear
-    var linDist = minDist + (maxScore-score)*(maxDist-minDist)/maxScore;
+    var linDist = maxScore<1e-6 ? 1.0 : minDist + (maxScore-score)*(maxDist-minDist)/maxScore;
     return linDist;
 }
 
@@ -240,7 +240,9 @@ function mainFunc(queryArray) {
 }
 
 function qFunc() {
-    mainFunc(['台灣', '中國', '兩岸', '棒球', '中華']).then(dumpRes);
+    var arr = ['大師兄'];
+    //mainFunc(['台灣', '中國', '兩岸', '棒球', '中華']).then(dumpRes);
+    mainFunc(arr).then(dumpRes);
     return false;
 }
 
