@@ -15,6 +15,7 @@ function draw(res) {
       "children": res
     };
     update();
+    navTo('graph');
     return res;
 }
 
