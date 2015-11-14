@@ -65,23 +65,23 @@
       1077717378914836 Maxis Kao
     */
 
-    // get msg from Kelvin Yang
-    getTargetFriendsFeed('10204923084869530');
-
-    //getAllFriends();
-
-    function getAllFriends() {
+    function getAllFriendsID() {
        FB.api('/me/friends', function(response) {
-            console.log(response['data']);
+            //console.log(response['data']);
             for (var i=0;i<response['data'].length;i++) {
               //id: response['data'][i].id
               //name: response['data'][i].name
-              console.log(response['data'][i].id);
-              console.log(response['data'][i].name);
+              //console.log(response['data'][i].id);
+              //console.log(response['data'][i].name);
               getTargetFriendsFeed(response['data'][i].id);
             }
        });
     }
+
+    getAllFriendsID();
+
+    // get msg from Kelvin Yang
+    // getTargetFriendsFeed('10204923084869530');
 
      function getTargetFriendsFeed(feed_id) {
         FB.api('/' + feed_id + '/feed?fields=message,link,story,name,caption,description', function(feed) {
