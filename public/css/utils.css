@@ -1,0 +1,39 @@
+.jose {
+    font-family: 'Josefin Sans', sans-serif!important;
+}
+
+.dosis {
+    font-family: 'Dosis', sans-serif!important;
+}
+
+.d-n {
+    display: none!important;
+}
+
+.bg-fb {
+    background: #344b8d;
+}
+
+.d-ib {
+    display: inline-block;
+}
+
+h1, h2, h3, h4 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+h1 {
+    margin: 0.67em 0;
+    font-size: 2em;
+}
+h4 {
+    font-size: 18px;
+}

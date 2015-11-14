@@ -1,28 +1,9 @@
-.jose {
-    font-family: 'Josefin Sans', sans-serif!important;
-}
-
-.dosis {
-    font-family: 'Dosis', sans-serif!important;
-}
-
-.d-n {
-    display: none!important;
-}
-
-.bg-fb {
-    background: #344b8d;
-}
-
-.d-ib {
-    display: inline-block;
-}
-
 body {
     width: 100%;
     clear: both;
     margin: 0;
     padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;    
 }
 
 .section .next {
