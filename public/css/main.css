@@ -6,8 +6,16 @@
     font-family: 'Dosis', sans-serif!important;
 }
 
+.d-n {
+    display: none!important;
+}
+
 .bg-fb {
     background: #344b8d;
+}
+
+.d-ib {
+    display: inline-block;
 }
 
 body {
@@ -49,7 +57,6 @@ body {
     width: 128px;
     margin: 0 auto;
     color: white;
-    /*transition: background-color 2s;*/
 }
 
 .fb-btn {
