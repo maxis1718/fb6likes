@@ -41,7 +41,8 @@ function preprocessFeedArr(arr) {
     });
 }
 
-function fetchFeed(uid) {
+function fetchFeed(uid, pictures) {
+    console.log(pictures);
     var fieldWeCare = [
         'message',
         'link',
@@ -58,14 +59,16 @@ function fetchFeed(uid) {
         preprocessFeedArr(feedArr);
         return {
             uid:uid,
-            feed:feedArr
+            feed:feedArr,
+            pictures: pictures
         };
     });
 }
 
 function fetchAllFeed(targets) {
+    var pics = [].concat(targets.map(function(p) { return p.picture; }));
     var ids = ['me'].concat(targets.map(function(x) { return x.id; }));
-    var reqs = ids.map(function(id) { return fetchFeed(id); });
+    var reqs = ids.map(function(id) { return fetchFeed(id, pics[0].data.url); });
     return Promise.all(reqs);
 }
 
