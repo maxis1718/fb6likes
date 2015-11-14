@@ -28,6 +28,8 @@ root.fixed = true;
 root.x = w / 2;
 root.y = h / 2 - 80;
 
+var pinned = false;
+
 function update() {
   var nodes = flatten(root),
       links = d3.layout.tree().links(nodes),
@@ -85,7 +87,9 @@ function update() {
       .style("fill", function(d) {
         return "url(#image" + d.id + ")";
       })
-	    .on('click', click)
+	  .on('mouseenter', enter)
+	  .on('mouseleave', leave)
+      .on('click',handlePin)
       .call(force.drag);
 
   // Exit any old nodes.
@@ -125,34 +129,43 @@ function flatten(root) {
  * Attach a context menu to a D3 element
  */
 
-contextMenuShowing = false;
-
-function click(d, i) {
+function leave(d, i){
 	d3.event.preventDefault();
-	if (contextMenuShowing) {
-		d3.select(".popup").remove();
-	} else {
-		if(d.name=="flare" || d.likedPosts.length===0) return;
-		popup = d3.select(".d3-container")
-					.append("div")
-					.attr("class", "popup")
-					.style("left", "8px")
-					.style("top", "8px");
-		for(var text in d.likedPosts){
-			text = d.likedPosts[text];
-			if(text.message)
-				popup.append("h2")
-					 .append("a").attr("href",text.link)
-					 .text(text.message);
-			else
-				popup.append("h2")
-					 .append("a").attr("href",text.link)
-			 		 .text(text.name);
-			if(text.description){
-				content = text.description.length > 50 ? text.description.substr(0,50)+"..." : text.description;
-				popup.append("p").text(content);
-			}
+    if(!pinned) {
+        d3.select(".popup").remove();
+    }
+}
+
+function enter(d, i) {
+	if(d.name=="flare" || d.likedPosts.length===0) return;
+    //
+    pinned = false;
+    if(d3.select(".popup")) {
+        d3.select(".popup").remove();
+    }
+    //
+	popup = d3.select(".d3-container")
+				.append("div")
+				.attr("class", "popup")
+				.style("left", "8px")
+				.style("top", "8px");
+	for(var text in d.likedPosts){
+		text = d.likedPosts[text];
+		if(text.message)
+			popup.append("h2")
+				 .append("a").attr("href",text.link)
+				 .text(text.message);
+		else
+			popup.append("h2")
+				 .append("a").attr("href",text.link)
+		 		 .text(text.name);
+		if(text.description){
+			content = text.description.length > 50 ? text.description.substr(0,50)+"..." : text.description;
+			popup.append("p").text(content);
 		}
 	}
-	contextMenuShowing = !contextMenuShowing;
+}
+
+function handlePin(d, i) {
+    pinned = true;
 }
