@@ -15,6 +15,7 @@
     <link rel="shortcut icon" href="static/img/favicon.png">
 
     <!-- CSS -->
+    <link rel="stylesheet" href="css/jquery.fullpage.min.css" type="text/css">
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="css/bootstrap-theme.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.css" type="text/css">
@@ -34,18 +35,21 @@
         fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
-    <div class="container">
-        <header class="row col-lg-12 col-md-12 col-xs-12 col-sm-12 fb6likes">
-            <div class="d-ib header-title">fb6likes</div>
-            <div class="d-ib fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
-        </header>
-        <section class="row col-lg-12 col-md-12 col-xs-12 col-sm-12">
-            put d3 graph here
-        </section>
-        <footer>footer</footer>
+    <div id="fullpage">
+        <div class="section active bg-fb">
+            <div class="section-title">
+                <h1>fb6likes</h1>
+                <h4 class="">聽聽不同的聲音</h4>
+                <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
+            </div>
+        </div>
+        <div class="section">Some section</div>
+        <div class="section">Some section</div>
+        <div class="section">Some section</div>
     </div>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.fullpage.min.js"></script>
     <script type="text/javascript" src="js/d3.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-extras.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
