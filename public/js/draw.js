@@ -82,6 +82,7 @@ function update() {
       .style("fill", function(d) {
       	return "url(#image" + d.id + ")"; 
       })
+	  .on('click', click)
       .call(force.drag);
 
   // Exit any old nodes.
@@ -104,16 +105,16 @@ function color(d) {
 }
 
 // Toggle children on click.
-function click(d) {
-  if (d.children) {
-    d._children = d.children;
-    d.children = null;
-  } else {
-    d.children = d._children;
-    d._children = null;
-  }
-  update();
-}
+//function click(d) {
+//  if (d.children) {
+//    d._children = d.children;
+//    d.children = null;
+//  } else {
+//    d.children = d._children;
+//    d._children = null;
+//  }
+//  update();
+//}
 
 // Returns a list of all nodes under the root.
 function flatten(root) {
@@ -129,3 +130,29 @@ function flatten(root) {
   root.size = recurse(root);
   return nodes;
 }
+/* 
+ * Attach a context menu to a D3 element
+ */
+
+contextMenuShowing = false;
+
+function click(d, i) {
+		d3.event.preventDefault();
+		if (contextMenuShowing) {
+		d3.select(".popup").remove();
+		} else {
+		popup = d3.select(".d3-container")
+		.append("div")
+		.attr("class", "popup")
+		.style("left", "8px")
+		.style("top", "8px");
+		popup.append("h2").text(d.display_division);
+		popup.append("p").text(
+			"The " + d.display_division + " division (wearing " + d.display_color + " uniforms) had " + d.casualties + " casualties during the show's original run.")
+		popup.append("p")
+		.append("a")
+		.attr("href","http://google.com")
+		.text("testtesttest");
+		}
+		contextMenuShowing = !contextMenuShowing;
+		}
