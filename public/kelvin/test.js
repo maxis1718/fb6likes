@@ -48,13 +48,15 @@ function preprocessFeedArr(arr) {
     arr.forEach(function(ele) {
         var author = ele.from.id;
         var check = false;
-        for (var i=0;i<ele.likes.data.length;i++) {
-            if (author === ele.likes.data[i].id) {
-                check = true;
+        if(ele.likes && ele.likes.data && ele.likes.data.length) {
+            for (var i=0;i<ele.likes.data.length;i++) {
+                if (author === ele.likes.data[i].id) {
+                    check = true;
+                }
             }
-        }
-        if (check === false) {
-            ele.likes.data.push({id: author});
+            if (check === false) {
+                ele.likes.data.push({id: author});
+            }
         }
         ele.md5 = calcMD5(ele.message+ele.link);
     });
