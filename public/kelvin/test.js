@@ -228,7 +228,7 @@ function test(queryArray) {
     //var regexMatcher = /台灣|中國|兩岸/;
     //var regexMatcher = /台灣|中國|兩岸|棒球|中華/;
     var regexString = queryArray.join('|');
-    var regexMatcher = new RegExp(regexString);
+    var regexMatcher = new RegExp(regexString, 'i');
     //testRequest('/me/friends');
     return Promise.all([fetchMe(), fetchMyFriend()]).
     then(function(ans) { return [ans[0]].concat(ans[1]); }).
