@@ -19,8 +19,11 @@ $(document).ready(function() {
 
     $('.topic-input').keyup(function(e){
         if (e.keyCode === 13 || e.which === 13) {
+            var drawBtn = $(this);
             var queries = getQuery($(this));
+            drawBtn.find('.fa').toggleClass('d-n');
             mainFunc(queries).then(function(res) {
+                drawBtn.find('.fa').toggleClass('d-n');
                 var selfNode = res.shift();
                 res.forEach(function(node) {
                   node.dis *= 400;
@@ -40,7 +43,10 @@ $(document).ready(function() {
 
     $('.draw-warp').click(function(e){
         var queries = getQuery($('.topic-input'));
+        var drawBtn = $(this);
+        drawBtn.find('.fa').toggleClass('d-n');
         mainFunc(queries).then(function(res) {
+            drawBtn.find('.fa').toggleClass('d-n');
             var selfNode = res.shift();
             res.forEach(function(node) {
               node.dis *= 400;
