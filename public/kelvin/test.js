@@ -84,7 +84,22 @@ function genDistance(data) {
     // ]
     var n = data.length;
     var score = Array.apply(null, Array(n)).map(Number.prototype.valueOf,0);
-    
+    var posts = {
+        // id -> {
+        //   message: ...
+        //   likes: [ ... ]
+        //   ...
+        // }
+    };
+    // fill posts object
+    data.forEach(function(ele) {
+        var feeds = ele.feed;
+        feeds.forEach(function(feed) {
+            posts[feed.md5] = _.clone(feed);
+        });
+    });
+    console.log(posts);
+    // calc score
     // return format
     // ret: [
     //   {
