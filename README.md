@@ -21,6 +21,6 @@ Your app should now be running on [localhost](http://localhost:80/).
 ## Screenshots
 ![Opinionoted Page](https://raw.githubusercontent.com/maxis1718/fb6likes/master/screenshots/opinionoted_1.jpg "Opinionoted Page")
 
-![Opinionoted Query](https://raw.githubusercontent.com/maxis1718/fb6likes/master/screenshots/opinionoted_1.jpg "Opinionoted Query")
+![Opinionoted Query](https://raw.githubusercontent.com/maxis1718/fb6likes/master/screenshots/opinionoted_2.jpg "Opinionoted Query")
 
-![Opinionoted Graph](https://raw.githubusercontent.com/maxis1718/fb6likes/master/screenshots/opinionoted_1.jpg "Opinionoted Graph")
+![Opinionoted Graph](https://raw.githubusercontent.com/maxis1718/fb6likes/master/screenshots/opinionoted_3.jpg "Opinionoted Graph")
